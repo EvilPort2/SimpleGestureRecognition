@@ -1,14 +1,15 @@
 import cv2
 import numpy as np
+import pyautogui as gui
 from gesture_api import do_gesture_action
 from collections import deque
 
 cam = cv2.VideoCapture(0)
-lower = np.array([20, 30, 108])                      # HSV yellow lower
-upper = np.array([30, 202, 255])                    # HSV yellow upper
+yellow_lower = np.array([7, 96, 85])                          # HSV yellow lower
+yellow_upper = np.array([255, 255, 255])                      # HSV yellow upper
 screen_width, screen_height = gui.size()
-camx, camy = 320,240
-buff = 64
+camx, camy = 480, 360
+buff = 128
 line_pts = deque(maxlen = buff)
 
 def process_created_gesture(created_gesture):
@@ -29,13 +30,12 @@ def process_created_gesture(created_gesture):
 def gesture_action():
     centerx, centery = 0, 0
     old_centerx, old_centery = 0, 0
-    area1 = area2 = area3 = 0
-    damping = 3
+    area1 = 0
     c = 0
-    flag = 0
-    sx, sy = (screen_width/camx)/damping, (screen_height/camy)/damping
+    flag_do_gesture = 0
+    flag0 = True
 
-    created_gesture = []
+    created_gesture_hand1 = []
 
     while True:
         _, img = cam.read()
@@ -48,7 +48,7 @@ def gesture_action():
         imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Mask for yellow color
-        mask = cv2.inRange(imgHSV, lower, upper)
+        mask = cv2.inRange(imgHSV, yellow_lower, yellow_upper)
 
         # Bluring to reduce noises
         blur = cv2.medianBlur(mask, 15)
@@ -63,20 +63,21 @@ def gesture_action():
         w, h = 0, 0
         if len(contours) == 0:                                                  # Completion of a gesture
             line_pts = deque(maxlen = buff)                                     # Empty the deque
-            processed_gesture = tuple(process_created_gesture(created_gesture))
-            if flag == 0:                                                       # flag to make sure that gesture runs only once and not repeatedly
-                if processed_gesture != ():
-                    do_gesture_action(processed_gesture)
-                flag = 1
-            print(processed_gesture)                                            # for debugging purposes
-            created_gesture = []
+            processed_gesture_hand1 = tuple(process_created_gesture(created_gesture_hand1))
+            if flag_do_gesture == 0:                                            # flag_do_gesture to make sure that gesture runs only once and not repeatedly
+                if processed_gesture_hand1 != ():
+                    do_gesture_action(processed_gesture_hand1)
+                flag_do_gesture = 1
+            print(processed_gesture_hand1)                                      # for debugging purposes
+            created_gesture_hand1 = []
+            flag0 = True
         else:
-            flag = 0
+            flag_do_gesture = 0
             max_contour = max(contours, key = cv2.contourArea)
             rect1 = cv2.minAreaRect(max_contour)
             (w, h) = rect1[1]
             area1 = w*h
-            if area1 > 350:
+            if area1 > 450:
                 center1 = list(rect1[0])
                 box = cv2.boxPoints(rect1)                                      # to draw a rectangle
                 box = np.int0(box)
@@ -92,34 +93,37 @@ def gesture_action():
 
                 diffx, diffy = 0, 0
                 if c > 5:                                                       # check after every 5 iteration the new center
-                    diffx = (centerx - old_centerx)
-                    diffy = (centery - old_centery)
+                    diffx = centerx - old_centerx
+                    diffy = centery - old_centery
                     c = 0
 
+                if flag0 == False:
                 # the difference between the old center and the new center determines the direction of the movement
-                if abs(diffx) <=10 and abs(diffy) <= 10:
-                    created_gesture.append("St")
-                elif diffx > 15 and abs(diffy) <= 15:
-                    created_gesture.append("E")
-                elif diffx < -15 and abs(diffy) <= 15:
-                    created_gesture.append("W")
-                elif abs(diffx) <= 15 and diffy < -15:
-                    created_gesture.append("N")
-                elif abs(diffx) <= 15 and diffy > 15:
-                    created_gesture.append("S")
-                elif diffx > 25 and diffy > 25:
-                    created_gesture.append("SE")
-                elif diffx < -25 and diffy > 25:
-                    created_gesture.append("SW")
-                elif diffx > 25 and diffy < -25:
-                    created_gesture.append("NE")
-                elif diffx < -25 and diffy < -25:
-                    created_gesture.append("NW")
+                    if abs(diffx) <=10 and abs(diffy) <= 10:
+                        created_gesture_hand1.append("St")
+                    elif diffx > 15 and abs(diffy) <= 15:
+                        created_gesture_hand1.append("E")
+                    elif diffx < -15 and abs(diffy) <= 15:
+                        created_gesture_hand1.append("W")
+                    elif abs(diffx) <= 15 and diffy < -15:
+                        created_gesture_hand1.append("N")
+                    elif abs(diffx) <= 15 and diffy > 15:
+                        created_gesture_hand1.append("S")
+                    elif diffx > 25 and diffy > 25:
+                        created_gesture_hand1.append("SE")
+                    elif diffx < -25 and diffy > 25:
+                        created_gesture_hand1.append("SW")
+                    elif diffx > 25 and diffy < -25:
+                        created_gesture_hand1.append("NE")
+                    elif diffx < -25 and diffy < -25:
+                        created_gesture_hand1.append("NW")
 
                 for i in range(1, len(line_pts)):
                     if line_pts[i - 1] is None or line_pts[i] is None:
                         continue
                     cv2.line(img, line_pts[i-1], line_pts[i], (0, 255, 0), 2)
+
+                flag0 = False
 
         cv2.imshow("IMG", img)
         if cv2.waitKey(1) == ord('q'):
