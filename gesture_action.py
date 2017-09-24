@@ -81,14 +81,14 @@ def gesture_action():
                 center1 = list(rect1[0])
                 box = cv2.boxPoints(rect1)                                      # to draw a rectangle
                 box = np.int0(box)
+                cv2.drawContours(img,[box],0,(0,0,255),2)
                 centerx = center1[0] = int(center1[0])                          # center of the rectangle
                 centery = center1[1] = int(center1[1])
+                cv2.circle(img, (centerx, centery), 2, (0, 255, 0), 2)
                 line_pts.appendleft(tuple(center1))
                 if c == 0:
                     old_centerx = centerx
                     old_centery = centery
-                cv2.drawContours(img,[box],0,(0,0,255),2)
-                cv2.circle(img, (centerx, centery), 2, (0, 255, 0), 2)
                 c += 1
 
                 diffx, diffy = 0, 0
