@@ -26,8 +26,13 @@ Since I am wearing a yellow cap in my fingers, I use that to segment the yellow 
 8. T - Display task manager<br>
 9. \> - Alt+tab<br>
 10. < - Alt+Shift+Tab<br>
+11. <> - Take a photo
+12. [] - Screenshot
+13. Square and line - Open text editor
 
 # Usage
+First run the range-detector.py to set the range for the mask for colour segmentation. No need to change anything in the gesture_action.py file
+    python3 range-detector.py -f HSV -w
     python3 gesture_action.py
 
 # Got a question?
