@@ -32,6 +32,7 @@ Since I am wearing a yellow cap in my fingers, I use that to segment the yellow 
 
 # Usage
 First run the range-detector.py to set the range for the mask for colour segmentation. No need to change anything in the gesture_action.py file
+
     python3 range-detector.py -f HSV -w
     python3 gesture_action.py
 

@@ -58,7 +58,7 @@ def process_created_gesture(created_gesture):
         for j in range(len(created_gesture)):
             for i in range(len(created_gesture) - 1):
                 if created_gesture[i] == created_gesture[i+1]:
-                    created_gesture.remove(created_gesture[i+1])
+                    del created_gesture[i+1]
                     break
     return created_gesture
 
@@ -195,8 +195,6 @@ def gesture_action():
             line_pts2 = deque(maxlen = buff)
 
             processed_gesture, processed_gesture_left, processed_gesture_right = (), (), ()
-            
-            print(flags)
 
             if flags == [False, False, True]:                                       # completion of a 2 hand gesture
                 processed_gesture_left = tuple(process_created_gesture(created_gesture_hand_left))
@@ -210,7 +208,6 @@ def gesture_action():
                             st = datetime.datetime.fromtimestamp(ts).strftime('%Y_%m_%d %H_%M_%S')
                             cv2.imwrite("photos/"+st + ".png", img1)
                         else:
-                            print("2 hand")
                             do_gesture_action(processed_gesture_left, processed_gesture_right)
                     flag_do_gesture = 1
 
