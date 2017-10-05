@@ -30,9 +30,12 @@ Since I am wearing a yellow cap in my fingers, I use that to segment the yellow 
 12. [] - Screenshot
 13. Square and line - Open text editor
 
-# Usage
-First run the range-detector.py to set the range for the mask for colour segmentation. No need to change anything in the gesture_action.py file
+# Prerequisites
+1. Since I am using threads in the program the first thing you need to do is go to the site mentioned and apply the solution given. Here is the website https://stackoverflow.com/questions/36809788/importerror-no-module-named-thread<br>
+2. You need additional imutils functionalities. These can be found here https://github.com/jrosebr1/imutils.<br>
 
+# Usage
+First run the range-detector.py to set the range for the mask for colour segmentation and then press q when the perfect range is found. Then start the gesture_action.py. No need to change anything in the gesture_action.py file.
     python3 range-detector.py -f HSV -w
     python3 gesture_action.py
 
