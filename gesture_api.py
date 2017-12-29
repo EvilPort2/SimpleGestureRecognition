@@ -62,11 +62,8 @@ def maximize(x = None):
 def minimize(x = None):
 	gui.hotkey('winleft', 'down')
 
-def lockscreen(cam):
-	cam.release()
-	os.system("python modules/face_lock_unlock/unlock_using_face.py")
-	cam = cv2.VideoCapture(1)
-	return cam
+def lockscreen(x = None):
+	gui.hotkey('winleft', 'l')
 
 def task_manager(x = None):
 	gui.hotkey('ctrlleft', 'shiftleft', 'esc')
