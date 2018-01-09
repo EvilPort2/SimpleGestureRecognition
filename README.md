@@ -2,10 +2,7 @@
 A very simple gesture recognition technique using opencv and python
 
 # Outcome
-Before going on into much details and wasting your time just watch this video to get an idea of what I have done. Here is the <a href = "https://www.youtube.com/watch?v=qFmtNNxpsvk">first video and <a href = "https://www.youtube.com/watch?v=DRL9zuB1g6A">the second one</a>.
-<iframe width="854" height="480" src="https://www.youtube.com/embed/qFmtNNxpsvk" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe><br>
-<iframe width="854" height="480" src="https://www.youtube.com/embed/DRL9zuB1g6A" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-Watch and also follow me :p
+Before going on into much details and wasting your time just watch this video to get an idea of what I have done. Here is the <a href = "https://www.youtube.com/watch?v=qFmtNNxpsvk">first video and <a href = "https://www.youtube.com/watch?v=DRL9zuB1g6A">the second one</a>. Watch and also follow me :p
 
 # What have I done
 Since I am wearing a yellow cap in my fingers, I use that to segment the yellow colour which makes it a lot easier to get the gesture. Here are the steps that I have followed:<br>
