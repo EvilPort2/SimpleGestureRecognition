@@ -1,13 +1,9 @@
 import cv2
 import numpy as np
 import pyautogui as gui
-import time
 from imutils import contours
 from collections import deque
-import datetime
 import pickle
-import os, thread
-import pyHook, pythoncom
 from .gesture_api import do_gesture_action
 
 def contour_area_sort(contours, area_threshold):
