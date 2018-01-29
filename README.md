@@ -35,7 +35,7 @@ Since I am wearing a yellow cap in my fingers, I use that to segment the yellow 
 2. You need additional imutils functionalities. These can be found here https://github.com/jrosebr1/imutils.<br>
 
 # Usage
-First run the range-detector.py to set the range for the mask for colour segmentation and then press q when the perfect range is found. Then start the gesture_action.py. No need to change anything in the gesture_action.py file.
+First run the range-detector.py to set the range for the mask for colour segmentation and then press q when the perfect range is found. The easiest way to use it is to put the yellow paper in front of the camera and then slowly increasing the lower parameters(H_MIN, V_MIN, S_MIN) one by one and then slowly decreasing the upper parameters (H_MAX, V_MAX, S_MAX). When the adjusting has been done you will find that only the yellow paper will have a corresponding white patch and rest of the image will be dark. Then start the gesture_action.py. No need to change anything in the gesture_action.py file.
 
     python3 range-detector.py -f HSV -w
     python3 gesture_action.py
