@@ -4,7 +4,7 @@ import pyautogui as gui
 from imutils import contours
 from collections import deque
 import pickle
-from .gesture_api import do_gesture_action
+from gesture_api import do_gesture_action
 
 def contour_area_sort(contours, area_threshold):
 	contours.sort(key = cv2.contourArea, reverse = True)
@@ -256,4 +256,4 @@ def gesture_action():
 	cv2.destroyAllWindows()
 	cam.release()
 
-#gesture_action()
+gesture_action()
