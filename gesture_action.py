@@ -76,6 +76,9 @@ def gesture_action():
 	old_center_left, old_center_right, old_center, center_left, center_right, center = [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
 
 	cam = cv2.VideoCapture(1)
+	if cam.read()[0]==False:
+                cam = cv2.VideoCapture(0)
+        
 	while True:
 		print(count_stop, count_stop_right, count_stop_left)
 		_, img = cam.read()

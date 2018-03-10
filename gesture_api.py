@@ -3,7 +3,6 @@ import os
 import time
 import datetime
 import cv2
-import thread
 from threading import Thread
 
 class TakePhoto(Thread):
@@ -27,7 +26,7 @@ def screenshot(x):
 	gui.screenshot("screenshot/" + st + ".png")
 
 def text_editor(x = None):
-	thread.start_new_thread(os.system, ("notepad", ))
+	Thread(target=os.system, args=("notepad", )).start()
 
 def start_menu(x = None):
 	gui.press('winleft')
