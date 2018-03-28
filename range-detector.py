@@ -73,7 +73,9 @@ def main():
         else:
             frame_to_thresh = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     else:
-        camera = cv2.VideoCapture(0)
+        camera = cv2.VideoCapture(1)
+        if camera.read()[0] == False:
+            camera = cv2.VideoCapture(0)
 
     setup_trackbars(range_filter)
 
