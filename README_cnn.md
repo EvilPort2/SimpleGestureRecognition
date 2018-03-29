@@ -42,6 +42,15 @@ For this project I am using only the 'letters' dataset.
 	3. <i>keyboard_shortcut</i> - This is my favourite mode. So here you make a letter of the English alphabet, and corresponding to the alphabet a keyboard shortcut is emulated if there is any. There are 15 keyboard shortcuts programmed. Press 's' to get into this mode. The shortcuts are discussed later.
 
 		python gesture_action_cnn.py
+		
+## How to use this project
+1. First set the HSV masking range for the paper that you are wearing in your finger. To do that run this file	
+			
+		python range-detector.py -f HSV -w
+The easiest way to use it is to put the yellow paper in front of the camera and then slowly increasing the lower parameters(H_MIN, V_MIN, S_MIN) one by one and then slowly decreasing the upper parameters (H_MAX, V_MAX, S_MAX). When the adjusting has been done you will find that only the yellow paper will have a corresponding white patch and rest of the image will be dark. 
+2. Now run the gesture_action_cnn file.
+		
+		python gesture_action_cnn.py
 
 ## Keyboard Shortcuts
 1. A = Ctrl + A (Select all)
