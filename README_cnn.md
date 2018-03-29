@@ -41,7 +41,7 @@ For this project I am using only the 'letters' dataset.
 	2. <i>typing</i> - This mode is specially used with some other text editor. Make sure that the text editor is the current focussed window. The letters made by moving your finger is directly typed into the text editor. Press 't' to come to this mode.
 	3. <i>keyboard_shortcut</i> - This is my favourite mode. So here you make a letter of the English alphabet, and corresponding to the alphabet a keyboard shortcut is emulated if there is any. There are 15 keyboard shortcuts programmed. Press 's' to get into this mode. The shortcuts are discussed later.
 
-		python gesture_action_cnn.py
+			python gesture_action_cnn.py
 		
 ## How to use this project
 1. First set the HSV masking range for the paper that you are wearing in your finger. To do that run this file	
